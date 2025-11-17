@@ -1,0 +1,227 @@
+<!-- Martin Tolosa, 47314494 -->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PelisYA</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="contenido-cabecera">
+        <div class="navegacion-principal">
+          <h1 onclick="cambiarSeccion('peliculas')">🎬 CineStore</h1>
+          <button class="boton-inicio" onclick="cambiarSeccion('peliculas')">
+            🏠 Inicio
+          </button>
+          <button class="boton-contacto" onclick="cambiarSeccion('contacto')">
+            📞 Contacto
+          </button>
+        </div>
+        <div class="navegacion-secundaria">
+          <div class="icono-carrito" onclick="cambiarSeccion('carrito')">
+            🛒
+            <span class="contador-carrito" id="contador-carrito">0</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="contenedor">
+      <div id="peliculas" class="seccion activa">
+        <h2 style="text-align: center; margin: 30px 0; color: #ff6b35">
+          Películas Disponibles
+        </h2>
+        <div class="cuadricula-peliculas" id="cuadricula-peliculas"></div>
+      </div>
+
+      <div id="carrito" class="seccion">
+        <h2 style="margin-bottom: 20px; color: #ff6b35">Mi Carrito</h2>
+        <div id="contenedor-elementos-carrito"></div>
+      </div>
+
+      <div id="contacto" class="seccion">
+        <div class="seccion-formulario" style="max-width: 800px">
+          <div class="titulo-formulario">Contáctanos</div>
+
+          <div class="informacion-contacto">
+            <h3 style="color: #4ecdc4; margin-bottom: 20px">
+              📞 Información de Contacto
+            </h3>
+            <div class="info-item">
+              <div class="info-icono">📧</div>
+              <div><strong>Email:</strong> info@pelisya.com</div>
+            </div>
+            <div class="info-item">
+              <div class="info-icono">📱</div>
+              <div><strong>Teléfono:</strong> +54 (11) 3426-2043</div>
+            </div>
+            <div class="info-item">
+              <div class="info-icono">📍</div>
+              <div>
+                <strong>Dirección:</strong> Av. La plata 3378, Buenos Aires,
+                Argentina.
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icono">🕒</div>
+              <div><strong>Horario:</strong> Lunes a Viernes 9:00 - 18:00</div>
+            </div>
+          </div>
+
+          <form id="formulario-contacto" onsubmit="manejarEnvioContacto(event)">
+            <div class="grupo-formulario">
+              <label for="nombre-contacto">Nombre:</label>
+              <input
+                type="text"
+                id="nombre-contacto"
+                placeholder="Tu nombre completo"
+                required
+              />
+              <div class="error"></div>
+            </div>
+
+            <div class="grupo-formulario">
+              <label for="email-contacto">Email:</label>
+              <input
+                type="email"
+                id="email-contacto"
+                placeholder="tu@email.com"
+                required
+              />
+              <div class="error"></div>
+            </div>
+
+            <div class="grupo-formulario">
+              <label for="asunto-contacto">Asunto:</label>
+              <input
+                type="text"
+                id="asunto-contacto"
+                placeholder="Asunto de tu mensaje"
+                required
+              />
+              <div class="error"></div>
+            </div>
+
+            <div class="grupo-formulario">
+              <label for="mensaje-contacto">Mensaje:</label>
+              <textarea
+                id="mensaje-contacto"
+                rows="5"
+                placeholder="Tu mensaje..."
+                required
+              ></textarea>
+              <div class="error"></div>
+            </div>
+
+            <button type="submit">Enviar Mensaje</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="pago" class="seccion">
+        <div class="seccion-formulario" style="max-width: 500px">
+          <div class="titulo-formulario">Formulario de Pago</div>
+          <div
+            id="resumen-pedido"
+            style="
+              background: rgba(30, 25, 70, 0.8);
+              padding: 15px;
+              border-radius: 5px;
+              margin-bottom: 20px;
+            "
+          >
+            <p style="color: #4ecdc4; margin-bottom: 10px">
+              <strong>Total a pagar:</strong>
+            </p>
+            <p style="font-size: 1.5em; color: #ff6b35">
+              $<span id="total-pago">0</span>
+            </p>
+          </div>
+
+          <form id="formulario-pago" onsubmit="manejarPago(event)">
+            <div class="grupo-formulario">
+              <label for="nombre-titular">Nombre del Titular:</label>
+              <input
+                type="text"
+                id="nombre-titular"
+                placeholder="Juan Pérez"
+                required
+              />
+              <div class="error"></div>
+            </div>
+
+            <div class="grupo-formulario">
+              <label for="numero-tarjeta">Número de Tarjeta:</label>
+              <input
+                type="text"
+                id="numero-tarjeta"
+                placeholder="1234 5678 9012 3456"
+                maxlength="19"
+                required
+              />
+              <div
+                class="info-tarjeta"
+                id="visualizador-info-tarjeta"
+                style="display: none"
+              >
+                <span class="icono-tipo-tarjeta" id="icono-tipo-tarjeta"
+                  >💳</span
+                >
+                <span id="nombre-tipo-tarjeta">Tarjeta</span>
+              </div>
+              <div class="error"></div>
+            </div>
+
+            <div class="cuadricula-2">
+              <div class="grupo-formulario">
+                <label for="fecha-expiracion">Fecha de Expiración:</label>
+                <input
+                  type="text"
+                  id="fecha-expiracion"
+                  placeholder="MM/AA"
+                  maxlength="5"
+                  required
+                />
+                <div class="error"></div>
+              </div>
+
+              <div class="grupo-formulario">
+                <label for="cvv">Código de Seguridad (CVV):</label>
+                <input
+                  type="text"
+                  id="cvv"
+                  placeholder="123"
+                  maxlength="4"
+                  required
+                />
+                <div class="error"></div>
+              </div>
+            </div>
+
+            <div id="mensaje-exito-pago" class="mensaje-exito"></div>
+
+            <button type="submit">Confirmar Pago</button>
+            <button
+              type="button"
+              onclick="cancelarPago()"
+              style="background: #888; margin-top: 10px"
+            >
+              Cancelar
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>
+        &copy; 2025 PelisYA. Todos los derechos reservados. Pago seguro con
+        tarjeta de crédito.
+      </p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
