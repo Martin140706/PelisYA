@@ -8,4 +8,4 @@ Carrito: Listado de las películas agregadas al carrito
 Pago: Formulario de pago en el cual solicita nombre del titular, numero de tarjeta, Código de verificación y fecha de expiración
 Contacto: Formulario de contacto, dejando al usuario agregar su nombre, su mail, el asunto y un mensaje
 
-Link de Vercel para el deploy: 
+Link de Vercel del deploy: https://pelis-ya.vercel.app/
